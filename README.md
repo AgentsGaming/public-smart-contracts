@@ -6,6 +6,7 @@
 - MaxSupply: 100000000
 - Address: **0xa1C6E299c761011c9ca5193b2Aaab7898A23929b**
 - [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/AgentsGaming.sol/AgentsGaming.json)
+- [Read Contract](https://mumbai.polygonscan.com/address/0xa1C6E299c761011c9ca5193b2Aaab7898A23929b#readContract)
 - Call to mint() function:
 ```javascript
 import { ethers } from 'ethers';
