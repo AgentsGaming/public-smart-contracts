@@ -1,13 +1,6 @@
-# Sample Hardhat Project
+# Agents Gaming
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+## AGNT Contract (Mumbai)
+- Address: 0xa1C6E299c761011c9ca5193b2Aaab7898A23929b
+- [ABI File]()
+- MaxSupply: 100000000
