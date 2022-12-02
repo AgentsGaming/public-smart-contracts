@@ -18,7 +18,7 @@ async function purchase(buyerAddress, amount) {
     */
     /* From server with private key */
     const provider = "https://rpc-mumbai.maticvigil.com/"
-    const wallet = new ethers.Wallet(PrivateKey);
+    const wallet = new ethers.Wallet(PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey)
     const signer = wallet.connect(provider);
    
     const agentsGamingContract = new ethers.Contract(agentsGamingAddress, IagentsGaming, signer); 
