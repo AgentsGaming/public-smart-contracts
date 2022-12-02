@@ -5,6 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+const keccak256 = require('keccak256');
 
 async function main() {
   
@@ -19,7 +20,7 @@ async function main() {
   );
   */
 
-  const minter = ""; //TODO
+  const minter = "0xe453080f8Ba281881A169A62c6fADdaf1ceC4f67";
   const agentsGamingAddress = "0xa1C6E299c761011c9ca5193b2Aaab7898A23929b";
   const agentsGaming = AgentsGaming.attach(agentsGamingAddress);  
 
