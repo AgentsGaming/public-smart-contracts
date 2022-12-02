@@ -4,9 +4,9 @@
 - Name: AgentsGaming
 - Symbol: AGNT
 - MaxSupply: 100000000
-- Address: 0xa1C6E299c761011c9ca5193b2Aaab7898A23929b
+- Address: **0xa1C6E299c761011c9ca5193b2Aaab7898A23929b**
 - [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/AgentsGaming.sol/AgentsGaming.json)
-- Call mint function:
+- Call to mint() function:
 ```javascript
 import { ethers } from 'ethers';
 import IagentsGaming from './AgentsGaming.json';
@@ -18,7 +18,7 @@ async function purchase(buyerAddress, amount) {
     */
     /* From server with private key */
     const provider = "https://rpc-mumbai.maticvigil.com/"
-    const wallet = new ethers.Wallet(PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey)
+    const wallet = new ethers.Wallet(PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey=xxx)
     const signer = wallet.connect(provider);
    
     const agentsGamingContract = new ethers.Contract(agentsGamingAddress, IagentsGaming, signer); 
