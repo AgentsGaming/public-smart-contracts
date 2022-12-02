@@ -9,6 +9,7 @@
 - Call to mint() function:
 ```javascript
 import { ethers } from 'ethers';
+require('dotenv').config();
 import IagentsGaming from './AgentsGaming.json';
 const agentsGamingAddress = '0xa1C6E299c761011c9ca5193b2Aaab7898A23929b';
 async function purchase(buyerAddress, amount) {
@@ -17,8 +18,9 @@ async function purchase(buyerAddress, amount) {
     const signer = provider.getSigner();
     */
     /* From server with private key */
-    const provider = "https://rpc-mumbai.maticvigil.com/"
-    const wallet = new ethers.Wallet(PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey=xxx)
+    const TESTNET = "https://rpc-mumbai.maticvigil.com/"
+    const provider = new ethers.providers.JsonRpcProvider(TESTNET);
+    const wallet = new ethers.Wallet(process.env.PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey=xxx)
     const signer = wallet.connect(provider);
    
     const agentsGamingContract = new ethers.Contract(agentsGamingAddress, IagentsGaming, signer); 
