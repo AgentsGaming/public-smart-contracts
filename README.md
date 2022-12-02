@@ -22,8 +22,8 @@ async function purchase(buyerAddress, amount) {
     const provider = new ethers.providers.JsonRpcProvider(TESTNET);
     const wallet = new ethers.Wallet(process.env.PrivateKey); //Get PrivateKey with dotenv (.env: PrivateKey=xxx)
     const signer = wallet.connect(provider);
-   
     const agentsGamingContract = new ethers.Contract(agentsGamingAddress, IagentsGaming, signer); 
+    
     const tx = await agentsGaming.mint(buyerAddress, ethers.utils.parseEther(amount)); 
     await tx.wait();
 }
