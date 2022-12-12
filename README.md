@@ -30,3 +30,20 @@ async function purchase(buyerAddress, amount) {
 }
 ```
 
+## AG Market (Mumbai)
+- Address: **0xb0a0B11c025eb5869f3a71D716e6f319077D89F5**
+- [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/AGMarket.sol/AGMarket.json)
+- [Read Contract](https://mumbai.polygonscan.com/address/0x8f09D9441B81Ba8Ff4557C76C3AAf824f2EeD678#code)
+- TODO (javascript example from test)
+```javascript
+
+```
+
+## AGFT Factory (Mumbai)
+- Address: **0x8f09D9441B81Ba8Ff4557C76C3AAf824f2EeD678**
+- [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/AGFTFactory.sol/AGFTFactory.json)
+- [Read Contract](https://mumbai.polygonscan.com/address/0xb0a0B11c025eb5869f3a71D716e6f319077D89F5#code)
+- TODO (javascript example from test)
+```javascript
+
+```

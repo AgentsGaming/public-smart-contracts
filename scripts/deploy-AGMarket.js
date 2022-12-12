@@ -22,8 +22,8 @@ async function main() {
     `AG Fan Tokens Factory deployed to ${agftFactory.address}`
   );
 
-  const agMarket = await AGMarket.deploy();
-  await agMarket.deployed(minter, ethers.utils.parseEther("0"), agftFactory.address, agentsGamingAddress);
+  const agMarket = await AGMarket.deploy(minter, ethers.utils.parseEther("0"), agftFactory.address, agentsGamingAddress);
+  await agMarket.deployed();
   console.log(
     `AG Market deployed to ${agMarket.address}`
   );
