@@ -6,7 +6,6 @@ import "./AGFanTokens.sol";
 contract AGFTFactory is AccessControl {
     bytes32 public constant DEPLOYER_ROLE = keccak256("DEPLOYER_ROLE");
     AGFanTokens[] public fanTokens; //an array that contains different ERC20 tokens deployed
-    mapping(uint256 => address) public indexToContract; //index to contract address mapping
     mapping(uint256 => address) public indexToOwner; //index to ERC20 owner address
     
     event FanTokenCreated(uint256 index, address owner, address tokenContract); //emited when ERC20 token is deployed
@@ -21,7 +20,6 @@ contract AGFTFactory is AccessControl {
     function deployAGFanTokensContract(string memory name, string memory symbol, uint64 maxSupply) public onlyRole(DEPLOYER_ROLE) returns (address) {
         AGFanTokens ft = new AGFanTokens(name, symbol, maxSupply);
         fanTokens.push(ft);
-        indexToContract[fanTokens.length - 1] = address(ft);
         indexToOwner[fanTokens.length - 1] = tx.origin;
         emit FanTokenCreated(fanTokens.length - 1, tx.origin, address(ft));
         return address(ft);
