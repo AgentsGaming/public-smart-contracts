@@ -14,11 +14,17 @@ describe("AgentsGaming", function () {
 
         // Contracts are deployed using the first signer/account by default
         const [owner, operator, user] = await ethers.getSigners();
-
+        const price = 0;
         const AgentsGaming = await ethers.getContractFactory("AgentsGaming");
+        const AGFTFactory = await ethers.getContractFactory("AGFTFactory");
+        const AGMarket = await ethers.getContractFactory("AGMarket");
         const agentsGaming = await AgentsGaming.deploy();
+        const agftFactory = await AGFTFactory.deploy();
+        const agMarket = await AGMarket.deploy(owner.address, ethers.utils.parseEther(price.toString()), agftFactory.address, agentsGaming.address);
 
-        return { agentsGaming, owner, operator, user };
+        await agftFactory.grantRole(keccak256("DEPLOYER_ROLE"), agMarket.address);
+
+        return { agentsGaming, agMarket, owner, operator, user };
     }
 
     describe("Deployment", function () {
@@ -50,22 +56,13 @@ describe("AgentsGaming", function () {
 
     });
 
-
-/*
-    describe("Transfers", function () {
-        it("Should transfer the funds to the owner", async function () {
-            const { lock, unlockTime, lockedAmount, owner } = await loadFixture(
-                deployOneYearLockFixture
-            );
-
-            await time.increaseTo(unlockTime);
-
-            await expect(lock.withdraw()).to.changeEtherBalances(
-                [owner, lock],
-                [lockedAmount, -lockedAmount]
-            );
+    describe("Create Fan Tokens", function () {
+        it("Should transfer some fan tokens to the owner", async function () {
+            const { agMarket, operator, user } = await loadFixture(deployAgentsGaming);
+            await agMarket.connect(operator).createProject("Social Test", "TST", 1000);
+            await agMarket.connect(operator).mintFanToken(0, user.address, 100);
         });
     });
-*/
+
 });
 

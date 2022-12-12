@@ -10,7 +10,7 @@ contract AgentsGaming is ERC20Capped, Pausable, AccessControl {
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    constructor() ERC20("AgentsGaming", "AGNT") ERC20Capped(100000000 * (10**uint256(18))) {
+    constructor() ERC20("AgentsGaming", "AGNT") ERC20Capped(100000000 * 10 ** decimals()) {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(PAUSER_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
