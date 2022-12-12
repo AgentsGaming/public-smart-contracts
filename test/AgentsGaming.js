@@ -24,7 +24,7 @@ describe("AgentsGaming", function () {
 
         await agftFactory.grantRole(keccak256("DEPLOYER_ROLE"), agMarket.address);
 
-        return { agentsGaming, agMarket, owner, operator, user };
+        return { agentsGaming, agMarket, agftFactory, owner, operator, user };
     }
 
     describe("Deployment", function () {
@@ -56,11 +56,31 @@ describe("AgentsGaming", function () {
 
     });
 
-    describe("Create Fan Tokens", function () {
+    describe("Create Fan Tokens free", function () {
         it("Should transfer some fan tokens to the owner", async function () {
             const { agMarket, operator, user } = await loadFixture(deployAgentsGaming);
             await agMarket.connect(operator).createProject("Social Test", "TST", 1000);
             await agMarket.connect(operator).mintFanToken(0, user.address, 100);
+        });
+    });
+
+    describe("Create Fan Tokens paying", function () {
+        it("Should transfer some fan tokens to the owner paying", async function () {
+            const { agMarket, agentsGaming, agftFactory, owner, operator, user } = await loadFixture(deployAgentsGaming);
+            await agentsGaming.mint(operator.address, ethers.utils.parseEther("2"));
+            expect(await agentsGaming.balanceOf(operator.address)).to.equal(ethers.utils.parseEther("2"));
+            expect(await agentsGaming.balanceOf(owner.address)).to.equal(ethers.utils.parseEther("0"));
+            await agMarket.setPrice(ethers.utils.parseEther("1"));
+
+            await agentsGaming.connect(operator).approve(agMarket.address, ethers.utils.parseEther("1"));
+            await agMarket.connect(operator).createProject("Social Test", "TST", 1000);
+            expect(await agentsGaming.balanceOf(operator.address)).to.equal(ethers.utils.parseEther("1"));
+            expect(await agentsGaming.balanceOf(owner.address)).to.equal(ethers.utils.parseEther("1"));
+
+            await agMarket.connect(operator).mintFanToken(0, user.address, ethers.utils.parseEther("100"));
+            const addressFanToken = await agftFactory.fanTokens(0);
+            const fanToken = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20", addressFanToken);
+            expect(await fanToken.balanceOf(user.address)).to.equal(ethers.utils.parseEther("100"));
         });
     });
 
