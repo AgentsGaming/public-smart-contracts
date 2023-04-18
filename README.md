@@ -1,3 +1,40 @@
+# Atent.io
+
+## Atent Factory (Mumbai)
+- Address: **0x762A2867EA4332C912a582037fCE07747eDe80dd**
+- [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/Atent.io/AtentFactory.json)
+- [Read Contract](https://mumbai.polygonscan.com/address/0x762A2867EA4332C912a582037fCE07747eDe80dd#code)
+```javascript
+    import { ethers } from 'ethers';
+    require('dotenv').config();
+    import IFactory from './AgentsGaming.json';
+    const factoryAddress = "0x762A2867EA4332C912a582037fCE07747eDe80dd";
+    const TESTNET = "https://rpc-mumbai.maticvigil.com/"
+    const provider = new ethers.providers.JsonRpcProvider(TESTNET);
+    const wallet = new ethers.Wallet(process.env.PrivateKey1); //Get PrivateKey with dotenv (.env: PrivateKey1=xxx)
+    const signer = wallet.connect(provider);
+
+    const atentFactory = new ethers.Contract(factoryAddress, IFactory, signer);
+    const internalAddress = "<address>";
+
+    //Example of Create Fan Token
+        //From signer = Organization1 wallet
+        await atentFactory.grantRole(keccak256("DEPLOYER_ROLE"), internalAddress);
+        await atentFactory.deployAGFanTokensContract("Social Test", "TST", 1000);
+    //Example of Minting Fan Token
+         //From signer = Organization1 wallet
+        const projectId = 0;
+        // From projectId = 0, sends 100 fanTokens to user1 and 200 fanTokens to user2
+        await await atentFactory.mintBatchFanTokens(projectId, [user1Address, user2Address], [ethers.utils.parseEther("100"), ethers.utils.parseEther("200")]);
+    //Example of Burning
+        const addressFanToken = await atentFactory.fanTokens(projectId);
+        const fanToken = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20", addressFanToken);
+        //From signer = User1 wallet
+        await fanToken.approve(factoryAddress, ethers.utils.parseEther("10"));
+        await agftFactory.burnFanTokens(projectId, ethers.utils.parseEther("10"));
+        
+```
+
 # Agents Gaming
 
 ## AGNT Contract (Mumbai)

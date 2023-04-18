@@ -14,8 +14,6 @@ async function main() {
 
   const AGFTFactory = await hre.ethers.getContractFactory("AtentFactory");
 
-  
-  
   const agftFactory = await AGFTFactory.deploy();
   await agftFactory.deployed();
   console.log(
