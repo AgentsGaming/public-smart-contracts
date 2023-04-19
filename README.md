@@ -2,7 +2,7 @@
 
 ## Atent Factory (Mumbai)
 - Address: **0x762A2867EA4332C912a582037fCE07747eDe80dd**
-- [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/Atent.io/AtentFactory.json)
+- [ABI File](https://github.com/rpmaya/AgentsGaming/blob/main/artifacts/contracts/Atent.io/AtentFactory.sol/AtentFactory.json)
 - [Read Contract](https://mumbai.polygonscan.com/address/0x762A2867EA4332C912a582037fCE07747eDe80dd#code)
 ```javascript
     import { ethers } from 'ethers';
